@@ -1,5 +1,5 @@
 " Chris Conte
-
+let g:ycm_log_level = 'debug'
 " Install Plug if not present
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -24,7 +24,7 @@ Plug 'w0rp/ale'
 Plug 'Valloric/YouCompleteMe'
 
 " snippets
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 
 " write (), {}, '', <> faster
 Plug 'tpope/vim-surround'
@@ -94,7 +94,7 @@ let g:ale_linters = {
 \}
 let g:ale_fixers = {
 \   'php': ['phpcbf'],
-\   'python': ['autopep8']
+\   'python': ['autopep8', 'add_blank_lines_for_python_control_statements', 'autopep8', 'black', 'isort', 'reorder-python-imports', 'yapf']
 \}
 
 nmap <F8> <Plug>(ale_fix)
@@ -104,9 +104,10 @@ let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 
 " themes
-" colorscheme destijl
+colorscheme desert
+highlight Comment gui=italic
 set macligatures
-set guifont=Fira\ Code:h14
+set guifont=Fira\ Code\ Regular:h14
 
 " file watcher doesn't catch changes if this isn't set
 set backupcopy=yes
@@ -215,3 +216,7 @@ function! TitleCase(str)
 endfunction
 vnoremap ~ y:call setreg('', TitleCase(@"), getregtype(''))<CR>gv""Pgv
 
+" terminal normal mode remap
+tnoremap <Esc> <C-\><C-n>
+
+set tabstop=4
